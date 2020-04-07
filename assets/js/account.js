@@ -29,7 +29,7 @@ function login() {
   formData.append("email", email);
   formData.append("password", password);
 
-  postFetch(LOGIN, formData, (res) => console.log(res)); //TODO SAVE AS COOKIE
+  postFetch(LOGIN, formData, (res) => createCookie(res));
 }
 
 function signup() {
@@ -44,5 +44,15 @@ function signup() {
   formData.append("password", password);
   formData.append("c_password", c_password);
 
-  postFetch(REGISTER, formData, (res) => console.log(res)); //TODO SAVE AS COOKIE
+  postFetch(REGISTER, formData, (res) => createCookie(res));
+}
+
+function createCookie(res) {
+  if(res.error == null){
+    document.cookie = "token=" + res.success.token;
+    toDashboard();
+  }
+  else{
+    console.log(res.error);//TODO add errors to screen
+  }
 }

@@ -2,7 +2,9 @@
 
 document.addEventListener("DOMContentLoaded", init);
 
-function init() {}
+function init() {
+  
+}
 
 function fetchData(url, callback) {
   fetch(url)
@@ -34,3 +36,24 @@ function elementByIdExist(id){
   return document.getElementById(id) !== null;
 }
 
+function getTokenFromCookie() {
+  var cookieValue = document.cookie.replace(
+    /(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+  return cookieValue;
+}
+
+function resetCookie() {
+  document.cookie = "token=" ;
+}
+
+function isLoggedIn(){
+  if(getTokenFromCookie() == ""){
+      window.location.href = "login.html";
+  }
+}
+
+function toDashboard(){
+  window.location.href = "index.html";
+}
