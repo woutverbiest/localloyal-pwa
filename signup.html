@@ -4,25 +4,48 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/stylesheets/reset.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/stylesheets/screen.css"
+    />
   </head>
   <body>
-    <h1>
-      Sign Up
-    </h1>
+    <div class="format1">
+      <h1>Sign Up</h1>
+      <div class="errors">
+        
+      </div>
+      <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" />
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" />
+        <label for="c_password">Retype password</label>
+        <input type="password" id="c_password" name="c_password" />
+        <div class="doublebutton">
+        <a href="login.html">Log In</a>
+        <a href="#" type="submit" id="signup">Next</a>
+        </div>
 
-    <form>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" />
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" />
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" />
-      <label for="c_password">Retype password</label>
-      <input type="password" id="c_password" name="c_password" />
+      </form>
+    </div>
 
-      <a href="login.html">Log In</a>
-      <a href="#" type="submit" id="signup">Next</a>
-    </form>
+    <div id="hidden" class="loading">
+      <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
 
     <script type="text/javascript" src="assets/js/endpoints.js"></script>
     <script type="text/javascript" src="assets/js/main.js"></script>

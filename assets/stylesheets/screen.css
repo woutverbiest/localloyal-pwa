@@ -1,5 +1,189 @@
+@font-face {
+  font-family: "nunito";
+  font-style: normal;
+  font-weight: normal;
+  src: local("nunito"), url("../fonts/Nunito-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "baloo";
+  font-style: normal;
+  font-weight: normal;
+  src: local("baloo"), url("../fonts/BalooChettan2-Regular.ttf") format("truetype");
+}
 body {
   background: white;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+main {
+  padding: 8px;
+}
+
+div.format1 {
+  padding: 16px;
+  padding-top: 150px;
+}
+div.format1 div.doublebutton {
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+div.format1 div.doublebutton a {
+  margin-right: 4px;
+  color: #5f6368;
+  border-color: #5f6368;
+}
+div.format1 div.doublebutton a + a {
+  margin-left: 4px;
+  margin-right: 0;
+  color: #1a73e8;
+  border-color: #1a73e8;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  padding: 8px;
+  border-radius: 8px;
+  font-family: "nunito", Arial, sans-serif;
+  border: 1px solid #5f6368;
+  color: #5f6368;
+}
+
+input:invalid {
+  color: #ea4335;
+  border-color: #ea4335;
+  box-shadow: none;
+}
+
+label {
+  display: block;
+  color: #5f6368;
+  font-family: "nunito", Arial, sans-serif;
+  padding: 8px 0 4px 0;
+  letter-spacing: 0.015em;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+h1 {
+  font-size: 2.25rem;
+  line-height: 2.75rem;
+  padding-bottom: 25px;
+  font-family: "baloo", Arial, sans-serif;
+}
+
+a {
+  display: block;
+  text-align: center;
+  padding: 8px;
+  border: 1px solid #1a73e8;
+  color: #1a73e8;
+  letter-spacing: 0.015em;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  border-radius: 8px;
+  font-family: "nunito", Arial, sans-serif;
+  font-style: normal;
+  text-decoration: none;
+}
+
+p {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.015em;
+  color: #5f6368;
+  padding-bottom: 20px;
+  font-family: "nunito", Arial, sans-serif;
+}
+
+.hidden, #hidden {
+  display: none;
+}
+
+.loading {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.errors {
+  font-family: "nunito", Arial, sans-serif;
+  letter-spacing: 0.015em;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #ea4335;
+}
+
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
 }
 
 /*# sourceMappingURL=screen.css.map */
