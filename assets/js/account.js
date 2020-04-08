@@ -3,6 +3,7 @@
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
+  isLoggedIn();
   eventlisteners();
 }
 
@@ -22,6 +23,7 @@ function eventlisteners() {
 }
 
 function login() {
+  addLoadingScreen();
   let email = getFormValue("email");
   let password = getFormValue("password");
 
@@ -33,6 +35,7 @@ function login() {
 }
 
 function signup() {
+  addLoadingScreen();
   let name = getFormValue("name");
   let email = getFormValue("email");
   let password = getFormValue("password");
@@ -48,11 +51,24 @@ function signup() {
 }
 
 function createCookie(res) {
-  if(res.error == null){
+  if (res.error == null) {
     document.cookie = "token=" + res.success.token;
     toDashboard();
+  } else {
+    removeLoadingScreen();
+
+    if (typeof res.error !== "object") {
+      document.querySelector(".errors").innerHTML = res.error;
+    } else {
+      document.querySelector(".errors").innerHTML = JSON.stringify(res.error);
+    }
   }
-  else{
-    console.log(res.error);//TODO add errors to screen
-  }
+}
+
+function addLoadingScreen() {
+  document.querySelector("#hidden").id = "nothidden";
+}
+
+function removeLoadingScreen() {
+  document.querySelector("#nothidden").id = "hidden";
 }
