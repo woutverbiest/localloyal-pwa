@@ -80,3 +80,11 @@ function toDashboard() {
 function toSetup(){
   window.location.href = "setup.html";
 }
+
+function addLoadingScreen() {
+  document.querySelector("#hidden").id = "nothidden";
+}
+
+function removeLoadingScreen() {
+  document.querySelector("#nothidden").id = "hidden";
+}

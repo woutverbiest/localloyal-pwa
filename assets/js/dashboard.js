@@ -10,6 +10,9 @@ function logger(res){
     if (res.error != null){
         toSetup();
     }
+    else{
+        removeLoadingScreen();
+    }
 }
 
 

@@ -65,10 +65,4 @@ function createCookie(res) {
   }
 }
 
-function addLoadingScreen() {
-  document.querySelector("#hidden").id = "nothidden";
-}
 
-function removeLoadingScreen() {
-  document.querySelector("#nothidden").id = "hidden";
-}
