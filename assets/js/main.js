@@ -2,9 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", init);
 
-function init() {
-  
-}
+function init() {}
 
 function fetchData(url, callback) {
   fetch(url)
@@ -13,26 +11,37 @@ function fetchData(url, callback) {
     .catch((error) => console.log(error));
 }
 
-
 function postFetch(endpoint, data, callback) {
   return fetch(getUrl(endpoint), {
     method: "POST",
-    body: data
+    body: data,
   })
-    .then((response)=>response.json())
-    .then((json)=>callback(json))
+    .then((response) => response.json())
+    .then((json) => callback(json))
     .catch((error) => console.error("Error:", error));
 }
 
-function getUrl(endpoint){
+function fetchDataWithToken(url ,token, callback){
+  return fetch(url, {
+    method: "GET",
+    headers: {
+      'Authorization' : token,
+      'Accept' : 'application/json',
+    },
+  }).then((response) => response.json())
+    .then((json) => callback(json))
+    .catch((error) => console.error("Error:", error));
+}
+
+function getUrl(endpoint) {
   return "http://localloyal.test" + endpoint;
 }
 
-function getFormValue(id){
+function getFormValue(id) {
   return document.getElementById(id).value;
 }
 
-function elementByIdExist(id){
+function elementByIdExist(id) {
   return document.getElementById(id) !== null;
 }
 
@@ -45,15 +54,29 @@ function getTokenFromCookie() {
 }
 
 function resetCookie() {
-  document.cookie = "token=" ;
+  document.cookie = "token=";
 }
 
-function isLoggedIn(){
-  if(getTokenFromCookie() == ""){
-      window.location.href = "login.html";
+function isNotLoggedIn() {
+  if (getTokenFromCookie() == "") {
+    window.location.href = "login.html";
   }
 }
 
-function toDashboard(){
+function isLoggedIn(){
+  if (getTokenFromCookie() != "") {
+    window.location.href = "index.html";
+  }
+}
+
+function hasShop(){
+  fetchDataWithToken(SHOP, res => console.log(res));
+}
+
+function toDashboard() {
   window.location.href = "index.html";
+}
+
+function toSetup(){
+  window.location.href = "setup.html";
 }
