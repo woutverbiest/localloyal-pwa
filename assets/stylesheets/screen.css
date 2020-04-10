@@ -18,11 +18,17 @@ body {
 
 main {
   padding: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 840px;
 }
 
 div.format1 {
   padding: 16px;
   padding-top: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 400px;
 }
 
 div.format2 {
@@ -120,6 +126,11 @@ a {
   font-family: "nunito", Arial, sans-serif;
   font-style: normal;
   text-decoration: none;
+}
+
+a.graybutton {
+  color: #5f6368;
+  border-color: #5f6368;
 }
 
 p {
@@ -230,6 +241,21 @@ ul li.selected {
   }
   100% {
     transform: translate(24px, 0);
+  }
+}
+@media only screen and (min-width: 600px) {
+  .format1 > div {
+    border: 1px solid #dadce0;
+    padding: 16px;
+    border-radius: 15px;
+  }
+
+  .format3 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+  .format3 div {
+    padding: 8px;
   }
 }
 

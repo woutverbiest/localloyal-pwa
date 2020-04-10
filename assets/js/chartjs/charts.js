@@ -14,6 +14,8 @@ var months = [
 ];
 
 function drawDashboardChart(points, rewards) {
+  Chart.defaults.global.defaultFontFamily = 'baloo';
+  Chart.defaults.global.defaultFontSize = 14;
   var ctx = document.getElementById("chart").getContext("2d");
 
   var myChart = new Chart(ctx, {
@@ -26,14 +28,14 @@ function drawDashboardChart(points, rewards) {
           data: points,
           backgroundColor: "rgba(52, 168, 83,0)",
           borderColor: "rgb(52, 168, 83)",
-          borderWidth: 3,
+          borderWidth: 2,
         },
         {
           label: "#points spend on rewards",
           data: rewards,
           backgroundColor: "rgba(251, 188, 5,0)",
           borderColor: "rgb(251, 188, 5)",
-          borderWidth: 3,
+          borderWidth: 2,
         },
       ],
     },
