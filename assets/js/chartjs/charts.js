@@ -13,28 +13,33 @@ var months = [
   "December",
 ];
 
-function drawDashboardChart(points, rewards) {
+var green = "rgb(23,156,82)";
+var blue = "rgb(23,107,239)";
+var red = "rgb(255,62,48)";
+var yellow = "rgb(247,181,41)";
+
+function drawDoubleChart(data1, color1, label1, data2, color2, label2, labels, id) {
   Chart.defaults.global.defaultFontFamily = 'baloo';
   Chart.defaults.global.defaultFontSize = 14;
-  var ctx = document.getElementById("chart").getContext("2d");
+  var ctx = document.getElementById(id).getContext("2d");
 
-  var myChart = new Chart(ctx, {
+  var chart = new Chart(ctx, {
     type: "line",
     data: {
-      labels: monthOrder(),
+      labels: labels,
       datasets: [
         {
-          label: "€# spend in store",
-          data: points,
-          backgroundColor: "rgba(52, 168, 83,0)",
-          borderColor: "rgb(52, 168, 83)",
+          label: label1,
+          data: data1,
+          backgroundColor: "rgba(0, 0, 0, 0)",
+          borderColor: color1,
           borderWidth: 2,
         },
         {
-          label: "#points spend on rewards",
-          data: rewards,
-          backgroundColor: "rgba(251, 188, 5,0)",
-          borderColor: "rgb(251, 188, 5)",
+          label: label2,
+          data: data2,
+          backgroundColor: "rgba(0, 0, 0, 0)",
+          borderColor: color2,
           borderWidth: 2,
         },
       ],
@@ -51,6 +56,56 @@ function drawDashboardChart(points, rewards) {
       },
     },
   });
+
+  return chart;
+}
+
+function updateDoubleChart(chart, labels, data1, data2){
+  chart.data.labels = labels;
+  chart.data.datasets[0].data = data1;
+  chart.data.datasets[1].data = data2;
+  chart.update();
+}
+
+function drawChart(data, color, label, labels, id){
+  Chart.defaults.global.defaultFontFamily = 'baloo';
+  Chart.defaults.global.defaultFontSize = 14;
+  var ctx = document.getElementById(id).getContext("2d");
+
+  var chart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: label,
+          data: data,
+          backgroundColor: "rgba(0, 0, 0, 0)",
+          borderColor: color,
+          borderWidth: 2,
+        }
+      ],
+    },
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          },
+        ],
+      },
+    },
+  });
+
+  return chart;
+}
+
+function updateChart(chart, labels, data){
+  chart.data.labels = labels;
+  chart.data.datasets[0].data = data;
+  chart.update();
 }
 
 function monthOrder() {
@@ -66,4 +121,28 @@ function monthOrder() {
     }
   }
   return order;
+}
+
+function daysthismonth(){
+  let order = [];
+  let currentdate = new Date();
+  ndays = getDaysInMonth((currentdate.getMonth())+1, currentdate.getYear());
+  console.log(ndays)
+  for(let i = 0; i < ndays; i++){
+    order.push(i+1);
+  }
+}
+
+function dayslastmonth(){
+  let order = [];
+  let currentdate = new Date();
+  ndays = getDaysInMonth((currentdate.getMonth()), currentdate.getYear());
+  console.log(ndays)
+  for(let i = 0; i < ndays; i++){
+    order.push(i+1);
+  }
+}
+
+function getDaysInMonth(month, year){
+  return new Date(year, month, 0).getDate();
 }
