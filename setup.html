@@ -36,6 +36,11 @@
         <form>
           <label for="shopname">Name Shop</label>
           <input type="text" id="shopname" name="shopname" />
+          <label for="shoptype">Shop Type</label>
+          <select id="shoptype" name="shoptype">
+          </select>
+          <label for="description">Description</label>
+          <textarea id="description" rows="3"></textarea>
           <label for="phone">Phone No.</label>
           <input type="text" id="phone" name="phone" />
           <label for="street">Street</label>
@@ -72,19 +77,23 @@
 
         <a href="#" type="submit" id="progress5">Next</a>
       </div>
-
-      
     </div>
 
     <div class="hidden format1" id=successful >
         <h1>Setup Successful</h1>
         <p>kfqsdkfj klqds jfkjdsmkf,klqdsjfk qdsjkfjdqksfk dsqfjmqdsfk</p>
-        <a href="#">Dashboard</a>
-    </div> 
-
-
-    
+        <a href="index.html">Dashboard</a>
+    </div>
   </main>
+
+  <div id="hidden" class="loading">
+    <div class="lds-ellipsis">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
 
   <script type="text/javascript" src="assets/js/endpoints.js"></script>
     <script type="text/javascript" src="assets/js/main.js"></script>

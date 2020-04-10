@@ -12,8 +12,10 @@ function logger(res){
     }
     else{
         removeLoadingScreen();
+        loadData();
     }
 }
 
-
-
+function loadData(){
+    
+}
