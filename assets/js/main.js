@@ -51,7 +51,7 @@ function postDataWithToken(url, token, data, callback) {
 }
 
 function getUrl(endpoint) {
-  return "http://localloyal.test" + endpoint;
+  return "http://localloyal.test" + endpoint; //TODO GET FROM CONFIG FILE
 }
 
 function getFormValue(id) {
@@ -86,6 +86,7 @@ function isLoggedIn() {
   }
 }
 
+//TODO USE THIS FUNCTION AND FIX IT
 function hasShop() {
   fetchDataWithToken(SHOP, (res) => console.log(res));
 }
