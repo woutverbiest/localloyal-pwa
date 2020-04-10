@@ -33,6 +33,20 @@ function fetchDataWithToken(url ,token, callback){
     .catch((error) => console.error("Error:", error));
 }
 
+function postDataWithToken(url, token,data,  callback){
+  return fetch(url, {
+    method: "POST",
+    headers:{
+      'Authorization' : token,
+      'Accept' : 'application/json',
+    },
+    body: data,
+
+  }).then((response)=>response.json())
+  .then((json) => callback(json))
+  .catch((error) => console.error("Error:", error))
+}
+
 function getUrl(endpoint) {
   return "http://localloyal.test" + endpoint;
 }
