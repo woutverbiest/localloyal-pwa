@@ -33,7 +33,7 @@ function fetchDataWithToken(url ,token, callback){
     .catch((error) => console.error("Error:", error));
 }
 
-function postDataWithToken(url, token,data,  callback){
+function postDataWithToken(url, token, data,  callback){
   return fetch(url, {
     method: "POST",
     headers:{

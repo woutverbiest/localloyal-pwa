@@ -11,11 +11,17 @@ function logger(res){
         toSetup();
     }
     else{
-        removeLoadingScreen();
         loadData();
     }
 }
 
 function loadData(){
+    console.log('start fetch');
+    fetchDataWithToken(getUrl(TRANSACTIONS), "Bearer " + getTokenFromCookie(), (res) => test(res));
+}
+
+function test(res){
     
+    removeLoadingScreen();
+    console.log(res.success);
 }
