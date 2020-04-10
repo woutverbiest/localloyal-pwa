@@ -27,6 +27,7 @@ function loadData() {
 }
 
 function chartData(res) {
+  console.log(res);
   let transactions = res.success; //TODO CHECK IF SUCCESS
   let points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   let rewards = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -36,7 +37,7 @@ function chartData(res) {
   let monthsum = 11 - month;
 
   for (let i = 0; i < transactions.length; i++) {
-    let date = new Date(res.success[i].added_on);
+    let date = new Date(transactions[i].added_on);
 
     if (date.getFullYear() == year) {
       if (transactions[i].spend_on_reward) {
