@@ -1,5 +1,7 @@
 "use strict";
 
+
+
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {}
@@ -21,30 +23,31 @@ function postFetch(endpoint, data, callback) {
     .catch((error) => console.error("Error:", error));
 }
 
-function fetchDataWithToken(url ,token, callback){
+function fetchDataWithToken(url, token, callback) {
   return fetch(url, {
     method: "GET",
     headers: {
-      'Authorization' : token,
-      'Accept' : 'application/json',
+      "Authorization": token,
+      "Accept": "application/json",
     },
-  }).then((response) => response.json())
+  })
+    .then((response) => response.json())
     .then((json) => callback(json))
     .catch((error) => console.error("Error:", error));
 }
 
-function postDataWithToken(url, token, data,  callback){
+function postDataWithToken(url, token, data, callback) {
   return fetch(url, {
     method: "POST",
-    headers:{
-      'Authorization' : token,
-      'Accept' : 'application/json',
+    headers: {
+      "Authorization": token,
+      "Accept": "application/json",
     },
     body: data,
-
-  }).then((response)=>response.json())
-  .then((json) => callback(json))
-  .catch((error) => console.error("Error:", error))
+  })
+    .then((response) => response.json())
+    .then((json) => callback(json))
+    .catch((error) => console.error("Error:", error));
 }
 
 function getUrl(endpoint) {
@@ -77,21 +80,21 @@ function isNotLoggedIn() {
   }
 }
 
-function isLoggedIn(){
+function isLoggedIn() {
   if (getTokenFromCookie() != "") {
     window.location.href = "index.html";
   }
 }
 
-function hasShop(){
-  fetchDataWithToken(SHOP, res => console.log(res));
+function hasShop() {
+  fetchDataWithToken(SHOP, (res) => console.log(res));
 }
 
 function toDashboard() {
   window.location.href = "index.html";
 }
 
-function toSetup(){
+function toSetup() {
   window.location.href = "setup.html";
 }
 
