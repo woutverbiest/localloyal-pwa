@@ -54,6 +54,6 @@ function chartData(res) {
       }
     }
   }
-  drawDashboardChart(points, rewards);
+  drawDoubleChart(points, green, "#€ spend in store", rewards, yellow, "#points spend on rewards", monthOrder(), "rewardpointschart")
   removeLoadingScreen();
 }
