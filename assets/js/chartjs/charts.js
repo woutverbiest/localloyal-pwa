@@ -127,20 +127,20 @@ function daysthismonth(){
   let order = [];
   let currentdate = new Date();
   ndays = getDaysInMonth((currentdate.getMonth())+1, currentdate.getYear());
-  console.log(ndays)
   for(let i = 0; i < ndays; i++){
     order.push(i+1);
   }
+  return order;
 }
 
 function dayslastmonth(){
   let order = [];
   let currentdate = new Date();
   ndays = getDaysInMonth((currentdate.getMonth()), currentdate.getYear());
-  console.log(ndays)
   for(let i = 0; i < ndays; i++){
     order.push(i+1);
   }
+  return order;
 }
 
 function getDaysInMonth(month, year){
