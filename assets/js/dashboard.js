@@ -27,7 +27,6 @@ function loadData() {
 }
 
 function chartData(res) {
-  console.log(res);
   let transactions = res.success; //TODO CHECK IF SUCCESS
   let points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   let rewards = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
