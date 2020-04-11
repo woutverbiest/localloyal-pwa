@@ -3,13 +3,6 @@
 document.addEventListener("DOMContentLoaded", init);
 
 var pointrewardchart = null;
-var transactionchart = null;
-var visitorschart = null;
-
-var visitordatamonth = null;
-var visitordatalmonth = null;
-var visitordatayear = null;
-var visitordatalyear = null;
 
 var rewarddatamonth = null;
 var rewarddatalmonth = null;
@@ -21,12 +14,8 @@ var pointdatalmonth = null;
 var pointdatayear = null;
 var pointdatalyear = null;
 
-var transactiondatamonth = null;
-var transactiondatalmonth = null;
-var transactiondatayear = null;
-var transactiondatalyear = null;
-
 function init() {
+  addLoadingScreen();
   eventListener();
   loadData();
 }
@@ -42,20 +31,8 @@ function drawChart() {
     daysthismonth(),
     "pointrewardchart"
   );
-  transactionchart = drawChart(
-    transactiondatamonth,
-    blue,
-    "#transactions",
-    daysthismonth(),
-    "transactionchart"
-  );
-  visitorchart = drawChart(
-    visitordatamonth,
-    red,
-    "#unique visitors",
-    daysthismonth(),
-    "visitorchart"
-  );
+
+  removeLoadingScreen();
 }
 
 function eventListener() {
@@ -92,8 +69,6 @@ function thismonth() {
     pointdatamonth,
     rewarddatamonth
   );
-  updateChart(transactionchart, daysthismonth(), transactiondatamonth);
-  updateChart(visitorchart, daysthismonth(), visitordatamonth);
 }
 function lastmonth() {
   updateDoubleChart(
@@ -102,8 +77,6 @@ function lastmonth() {
     pointdatalmonth,
     rewarddatalmonth
   );
-  updateChart(transactionchart, dayslastmonth(), transactiondatalmonth);
-  updateChart(visitorchart, dayslastmonth(), visitordatalmonth);
 }
 function thisyear() {
   updateDoubleChart(
@@ -112,18 +85,14 @@ function thisyear() {
     pointdatayear,
     rewarddatayear
   );
-  updateChart(transactionchart, monthOrder(), transactiondatayear);
-  updateChart(visitorchart, monthOrder(), visitordatayear);
 }
 function lastyear() {
   updateDoubleChart(
     pointrewardchart,
     monthOrder(),
     pointdatalyear,
-    rewarddatlyear
+    rewarddatalyear
   );
-  updateChart(transactionchart, monthOrder(), transactiondatalyear);
-  updateChart(visitorchart, monthOrder(), visitordatalyear);
 }
 
 function loadData() {
@@ -137,14 +106,13 @@ function loadData() {
 function processData(transactions) {
   processyear(transactions);
   processlastyear(transactions);
+  processmonth(transactions);
+  drawChart();
 }
 
 function processyear(transactions) {
-  pointdatayear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  rewarddatayear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  transactiondatayear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  visitordatayear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  let visitors = [[], [], [], [], [], [], [], [], [], [], [], []];
+  pointdatayear = generatelist(12, 0);
+  rewarddatayear = generatelist(12, 0);
 
   var month = new Date().getMonth();
   var year = new Date().getFullYear();
@@ -152,24 +120,12 @@ function processyear(transactions) {
 
   for (let i = 0; i < transactions.length; i++) {
     let date = new Date(transactions[i].added_on);
-    if (date.getFullYear() == year) {
-      transactiondatayear[date.getMonth() + monthsum] += 1;
-
-      if (transactions[i].spend_on_reward) {
+    if (date.getFullYear() == year) {if (transactions[i].spend_on_reward) {
         rewarddatayear[date.getMonth() + monthsum] += transactions[i].points;
       } else {
         pointdatayear[date.getMonth() + monthsum] += transactions[i].points;
       }
-
-      if (
-        !visitors[date.getMonth() + monthsum].includes(transactions[i].user_id)
-      ) {
-        visitors[date.getMonth() + monthsum].push(transactions[i].user_id);
-      }
-    } else if (date.getFullYear() == year - 1) {
-      transactiondatayear[date.getMonth() + monthsum - 12] += 1;
-
-      if (date.getMonth() > month) {
+    } else if (date.getFullYear() == year - 1) {if (date.getMonth() > month) {
         if (transactions[i].spend_on_reward) {
           rewarddatayear[date.getMonth() + monthsum - 12] +=
             transactions[i].points;
@@ -177,31 +133,14 @@ function processyear(transactions) {
           pointdatayear[date.getMonth() + monthsum - 12] +=
             transactions[i].points;
         }
-
-        if (
-          !visitors[date.getMonth() + monthsum - 12].includes(
-            transactions[i].user_id
-          )
-        ) {
-          visitors[date.getMonth() + monthsum - 12].push(
-            transactions[i].user_id
-          );
-        }
       }
     }
-  }
-
-  for (let i = 0; i < visitordatayear.length; i++) {
-    visitordatayear[i] = visitors[i].length;
   }
 }
 
 function processlastyear(transactions) {
-  pointdatalyear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  rewarddatalyear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  transactiondatalyear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  visitordatalyear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  let visitors = [[], [], [], [], [], [], [], [], [], [], [], []];
+  pointdatalyear = generatelist(12, 0);
+  rewarddatalyear = generatelist(12, 0);
 
   var month = new Date().getMonth();
   var year = new Date().getFullYear();
@@ -211,22 +150,12 @@ function processlastyear(transactions) {
     let date = new Date(transactions[i].added_on);
 
     if (date.getFullYear() == year - 1) {
-      transactiondatalyear[date.getMonth() + monthsum] += 1;
-
       if (transactions[i].spend_on_reward) {
         rewarddatalyear[date.getMonth() + monthsum] += transactions[i].points;
       } else {
         pointdatalyear[date.getMonth() + monthsum] += transactions[i].points;
       }
-      if (
-        !visitors[date.getMonth() + monthsum].includes(transactions[i].user_id)
-      ) {
-        visitors[date.getMonth() + monthsum].push(transactions[i].user_id);
-      }
-    } else if (date.getFullYear() == year - 2) {
-      transactiondatalyear[date.getMonth() + monthsum - 12] += 1;
-
-      if (date.getMonth() > month) {
+    } else if (date.getFullYear() == year - 2) {if (date.getMonth() > month) {
         if (transactions[i].spend_on_reward) {
           rewarddatalyear[date.getMonth() + monthsum - 12] +=
             transactions[i].points;
@@ -234,20 +163,53 @@ function processlastyear(transactions) {
           pointdatalyear[date.getMonth() + monthsum - 12] +=
             transactions[i].points;
         }
-        if (
-          !visitors[date.getMonth() + monthsum - 12].includes(
-            transactions[i].user_id
-          )
-        ) {
-          visitors[date.getMonth() + monthsum - 12].push(
-            transactions[i].user_id
-          );
-        }
       }
     }
   }
+}
 
-  for (let i = 0; i < visitordatalyear.length; i++) {
-    visitordatalyear[i] = visitors[i].length;
+function processmonth(transactions) {
+  pointdatamonth = generatelist(dayslastmonth().length, 0);
+  rewarddatamonth = generatelist(dayslastmonth().length, 0);
+  pointdatalmonth = generatelist(dayslastmonth().length, 0);
+  rewarddatalmonth = generatelist(dayslastmonth().length, 0);
+
+  var currentdate = new Date();
+
+  for (let i = 0; i < transactions.length; i++) {
+    let date = new Date(transactions[i].added_on);
+    console.log(date.getDate());
+    if (currentdate.getMonth() == date.getMonth() && currentdate.getFullYear() == date.getFullYear()) {
+      if (transactions[i].spend_on_reward) {
+        rewarddatamonth[date.getDate()-1] += transactions[i].points;
+      } else {
+        pointdatamonth[date.getDate()-1] += transactions[i].points;
+      }
+    }
+
+    else if(currentdate.getMonth() - 1 == date.getMonth() && currentdate.getFullYear() == date.getFullYear()){
+      if (transactions[i].spend_on_reward) {
+        rewarddatalmonth[date.getDate()-1] += transactions[i].points;
+      } else {
+        pointdatalmonth[date.getDate()-1] += transactions[i].points;
+      }
+    }
+    else if(currentdate.getMonth + 11 == date.getMonth() && currentdate.getFullYear() -1 == date.getFullYear()){
+      if (transactions[i].spend_on_reward) {
+        rewarddatalmonth[date.getDate()-1] += transactions[i].points;
+      } else {
+        pointdatalmonth[date.getDate()-1] += transactions[i].points;
+      }
+    }
   }
+}
+
+
+
+function generatelist(n, value) {
+  let list = [];
+  for (let i = 0; i < n; i++) {
+    list.push(value);
+  }
+  return list;
 }
