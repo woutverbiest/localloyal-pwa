@@ -5,26 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Statistics</title>
     <script
-      type="text/javascript"
-      src="assets/js/chartjs/chart.min.js"
+            type="text/javascript"
+            src="assets/js/chartjs/chart.min.js"
     ></script>
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="assets/stylesheets/reset.css"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="assets/stylesheets/screen.css"
+    />
     <script type="text/javascript" src="assets/js/chartjs/charts.js"></script>
 </head>
 <body>
+<div class="format2">
     <h1>Statistics</h1>
 
+    <div class="format3">
+        <div>
+            <canvas id="pointrewardchart" width="400" height="400"></canvas>
+        </div>
 
-    <div><canvas id="pointrewardchart" width="400" height="400"></canvas></div>
-    <div><canvas id="transactionchart" width="400" height="400"></canvas></div>
-    <div><canvas id="visitorchart" width="400" height="400"></canvas></div>
-    
-    <a href="#" id="month">This Month</a>
-    <a href="#" id="lmonth">Last Month</a>
-    <a href="#" id="year">This Year</a>
-    <a href="#" id="lyear">Last Year</a>
+        <div>
+            <a href="#" id="month">This Month</a>
+            <a href="#" id="lmonth">Last Month</a>
+            <a href="#" id="year">This Year</a>
+            <a href="#" id="lyear">Last Year</a>
+        </div>
+    </div>
+</div>
+<div id="hidden" class="loading">
+    <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+</main>
 
-    <script type="text/javascript" src="assets/js/endpoints.js"></script>
-    <script type="text/javascript" src="assets/js/main.js"></script>
-    <script type="text/javascript" src="assets/js/stats.js"></script>
+<script type="text/javascript" src="assets/js/endpoints.js"></script>
+<script type="text/javascript" src="assets/js/main.js"></script>
+<script type="text/javascript" src="assets/js/stats.js"></script>
 </body>
 </html>
