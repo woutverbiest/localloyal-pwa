@@ -136,6 +136,7 @@ function loadData() {
 
 function processData(transactions) {
   processyear(transactions);
+  processlastyear(transactions);
 }
 
 function processyear(transactions) {
@@ -151,7 +152,6 @@ function processyear(transactions) {
 
   for (let i = 0; i < transactions.length; i++) {
     let date = new Date(transactions[i].added_on);
-
     if (date.getFullYear() == year) {
       transactiondatayear[date.getMonth() + monthsum] += 1;
 
@@ -162,9 +162,9 @@ function processyear(transactions) {
       }
 
       if (
-        !visitors[date.getMonth() + monthsum].includes(transactions[i].user.id)
+        !visitors[date.getMonth() + monthsum].includes(transactions[i].user_id)
       ) {
-        visitors[date.getMonth() + monthsum].push(transactions[i].user.id);
+        visitors[date.getMonth() + monthsum].push(transactions[i].user_id);
       }
     } else if (date.getFullYear() == year - 1) {
       transactiondatayear[date.getMonth() + monthsum - 12] += 1;
@@ -179,15 +179,75 @@ function processyear(transactions) {
         }
 
         if (
-          !visitors[date.getMonth() + monthsum].includes(transaction[i].user.id)
+          !visitors[date.getMonth() + monthsum - 12].includes(
+            transactions[i].user_id
+          )
         ) {
-          visitors[date.getMonth() + monthsum].push(transactions[i].user.id);
+          visitors[date.getMonth() + monthsum - 12].push(
+            transactions[i].user_id
+          );
         }
       }
     }
   }
 
   for (let i = 0; i < visitordatayear.length; i++) {
-      visitordatayear[i] = visitors[i].length;
+    visitordatayear[i] = visitors[i].length;
+  }
+}
+
+function processlastyear(transactions) {
+  pointdatalyear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  rewarddatalyear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  transactiondatalyear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  visitordatalyear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  let visitors = [[], [], [], [], [], [], [], [], [], [], [], []];
+
+  var month = new Date().getMonth();
+  var year = new Date().getFullYear();
+  let monthsum = 11 - month;
+
+  for (let i = 0; i < transactions.length; i++) {
+    let date = new Date(transactions[i].added_on);
+
+    if (date.getFullYear() == year - 1) {
+      transactiondatalyear[date.getMonth() + monthsum] += 1;
+
+      if (transactions[i].spend_on_reward) {
+        rewarddatalyear[date.getMonth() + monthsum] += transactions[i].points;
+      } else {
+        pointdatalyear[date.getMonth() + monthsum] += transactions[i].points;
+      }
+      if (
+        !visitors[date.getMonth() + monthsum].includes(transactions[i].user_id)
+      ) {
+        visitors[date.getMonth() + monthsum].push(transactions[i].user_id);
+      }
+    } else if (date.getFullYear() == year - 2) {
+      transactiondatalyear[date.getMonth() + monthsum - 12] += 1;
+
+      if (date.getMonth() > month) {
+        if (transactions[i].spend_on_reward) {
+          rewarddatalyear[date.getMonth() + monthsum - 12] +=
+            transactions[i].points;
+        } else {
+          pointdatalyear[date.getMonth() + monthsum - 12] +=
+            transactions[i].points;
+        }
+        if (
+          !visitors[date.getMonth() + monthsum - 12].includes(
+            transactions[i].user_id
+          )
+        ) {
+          visitors[date.getMonth() + monthsum - 12].push(
+            transactions[i].user_id
+          );
+        }
+      }
+    }
+  }
+
+  for (let i = 0; i < visitordatalyear.length; i++) {
+    visitordatalyear[i] = visitors[i].length;
   }
 }
