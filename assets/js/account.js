@@ -47,7 +47,33 @@ function signup() {
   formData.append("password", password);
   formData.append("c_password", c_password);
 
-  postFetch(REGISTER, formData, (res) => createCookie(res));
+  postFetch(REGISTER, formData, (res) => node(res, email, password));  
+}
+
+function node(res, email, password){
+  var details = {
+    'email':email,
+    'password': password
+  }
+
+  var formBody = [];
+  for (var property in details){
+    var encodedKey = encodeURIComponent(property);
+    var encodedValue = encodeURIComponent(details[property]);
+    formBody.push(encodedKey + "=" + encodedValue);
+  }
+  formBody = formBody.join("&");
+
+  return fetch('http://localhost:8080/laravel/password',{
+    method:"POST",
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: formBody,
+  }).then((response)=>response.json())
+  .then(function(){
+    createCookie(res);
+  })
 }
 
 function createCookie(res) {
