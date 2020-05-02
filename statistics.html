@@ -1,54 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Statistics</title>
     <script
-            type="text/javascript"
-            src="assets/js/chartjs/chart.min.js"
+      type="text/javascript"
+      src="assets/js/chartjs/chart.min.js"
     ></script>
     <link
-            rel="stylesheet"
-            type="text/css"
-            href="assets/stylesheets/reset.css"
+      rel="stylesheet"
+      type="text/css"
+      href="assets/stylesheets/reset.css"
     />
     <link
-            rel="stylesheet"
-            type="text/css"
-            href="assets/stylesheets/screen.css"
+      rel="stylesheet"
+      type="text/css"
+      href="assets/stylesheets/screen.css"
     />
     <script type="text/javascript" src="assets/js/chartjs/charts.js"></script>
-</head>
-<body>
-<div class="format2">
-    <h1>Statistics</h1>
+  </head>
+  <body>
+    <main>
+      <div class="format2">
+        <h1>Statistics</h1>
 
-    <div class="format3">
-        <div>
+        <div class="format3">
+          <div>
             <canvas id="pointrewardchart" width="400" height="400"></canvas>
-        </div>
+          </div>
 
-        <div>
-            <a href="#" id="month">This Month</a>
-            <a href="#" id="lmonth">Last Month</a>
-            <a href="#" id="year">This Year</a>
-            <a href="#" id="lyear">Last Year</a>
+          <div>
+            <a href="#" id="month" class="graybutton">This Month</a>
+            <a href="#" id="lmonth" class="graybutton">Last Month</a>
+            <a href="#" id="year" class="graybutton">This Year</a>
+            <a href="#" id="lyear" class="graybutton">Last Year</a>
+          </div>
         </div>
-    </div>
-</div>
-<div id="hidden" class="loading">
-    <div class="lds-ellipsis">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
-</main>
+      </div>
+      <div id="hidden" class="loading">
+        <div class="lds-ellipsis">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </main>
 
-<script type="text/javascript" src="assets/js/endpoints.js"></script>
-<script type="text/javascript" src="assets/js/main.js"></script>
-<script type="text/javascript" src="assets/js/stats.js"></script>
-</body>
+    <script type="text/javascript" src="assets/js/endpoints.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+    <script type="text/javascript" src="assets/js/stats.js"></script>
+  </body>
 </html>
