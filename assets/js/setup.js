@@ -51,7 +51,7 @@ function saveShop() {
     const formData = new FormData();
     formData.append("shopname", shopname);
     formData.append("shoptype", shoptype);
-    formData.append("phone", phone);
+    formData.append("phonenumber", phone);
     formData.append("street",street);
     formData.append("city", city);
     formData.append("number", number);
