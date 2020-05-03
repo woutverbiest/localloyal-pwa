@@ -1,26 +1,23 @@
 {
   "name": "localloyal for business",
   "short_name": "localloyal",
-  "start_url": ".",
   "display": "standalone",
-  "theme_color":"#ffffff",
+  "theme_color": "#ffffff",
   "background_color": "#ffffff",
   "description": "Localloyal for business is the app for businesses that want to use the localloyal service.",
+  "orientation":"portrait",
+  "scope":"/",
+  "start_url":"/",
   "icons": [
     {
-      "src": "assets/images/touch/",
+      "src": "/assets/images/touch/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "assets/images/touch/",
-      "sizes": "256x256",
+      "src": "/assets/images/touch/android-chrome-512x512.png",
+      "sizes": "512x512",
       "type": "image/png"
-    },
-    {
-        "src": "assets/images/touch/",
-        "sizes": "512x512",
-        "type": "image/png"
     }
   ]
 }
