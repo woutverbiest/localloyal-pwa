@@ -11,6 +11,7 @@ self.addEventListener("fetch", e => {
                 <title>Document</title>
             </head>
             <body>
+                <h1>:(</h1>
                 <p>No internet connection.</p>
             </body>
             </html>`, { headers: { "Content-Type": "text/html "}});

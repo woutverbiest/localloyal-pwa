@@ -5,7 +5,7 @@ let apiToken = false;
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
-  //registerServiceWorker(); TODO UNCOMMENT
+  registerServiceWorker();
 }
 
 function registerServiceWorker() {

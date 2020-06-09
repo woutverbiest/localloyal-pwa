@@ -45,7 +45,7 @@ function saveShop() {
     let street = getFormValue("street");
     let city = getFormValue("city");
     let number = getFormValue("number");
-    let zip = getFormValue("zip");
+    let country = getFormValue("country");
     let description = getFormValue("description")
     
     const formData = new FormData();
@@ -55,7 +55,7 @@ function saveShop() {
     formData.append("street",street);
     formData.append("city", city);
     formData.append("number", number);
-    formData.append("zip", zip);
+    formData.append("country", country);
     formData.append("description", description);
 
     postDataWithToken(getUrl(SHOP_CREATE), "Bearer " + getTokenFromCookie(),formData, (res) => console.log(res));
