@@ -14,7 +14,8 @@ function fetchData(url, callback) {
 }
 
 function postFetch(endpoint, data, callback) {
-  return fetch(getUrl(endpoint), {
+  let url = getUrl(endpoint);
+  return fetch(url, {
     method: "POST",
     body: data,
   })
@@ -50,9 +51,7 @@ function postDataWithToken(url, token, data, callback) {
     .catch((error) => console.error("Error:", error));
 }
 
-function getUrl(endpoint) {
-  return "http://localloyal.test" + endpoint; //TODO GET FROM CONFIG FILE
-}
+
 
 function getFormValue(id) {
   return document.getElementById(id).value;
@@ -105,4 +104,18 @@ function addLoadingScreen() {
 
 function removeLoadingScreen() {
   document.querySelector("#nothidden").id = "hidden";
+}
+
+
+function getUrl(endpoint) {
+  console.log(endpoint)
+  return getLaravelUrl() + endpoint;
+}
+
+function getNodeUrl(){
+  return config.node;
+}
+
+function getLaravelUrl(){
+  return config.laravel;
 }
