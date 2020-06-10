@@ -1,0 +1,4 @@
+const config = {
+    "node":"http://localhost:8080",
+    "laravel":"http://localloyal.local"
+}
