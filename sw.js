@@ -10,6 +10,10 @@ const staticAssets = [
   "/login.html",
   "/signup.html",
   "/settings.html",
+  "/code.html",
+
+  "/assets/js/qrcodejs/qrcode.min.js",
+  "/assets/js/code.js",
 
   "/assets/stylesheets/reset.css",
   "/assets/stylesheets/screen.css",
@@ -86,3 +90,15 @@ const limitCacheSize = (name, size) => {
     });
   });
 };
+
+self.addEventListener("push", (event) => {
+  let message = event.data.text();
+  self.registration.showNotification(message);
+});
+
+//TODO add some functionality
+self.addEventListener("notificationclick", event => {
+  event.waitUntil(
+    self.ClientRectList.openWindow("http://http://127.0.0.1:5500/index.html")
+  );
+})

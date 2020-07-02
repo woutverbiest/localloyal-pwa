@@ -8,6 +8,7 @@
   "orientation":"portrait",
   "scope":"/",
   "start_url":"/",
+  "gcm_sernder_id": "930735938186",
   "icons": [
     {
       "src": "/assets/images/touch/android-chrome-192x192.png",
