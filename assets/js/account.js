@@ -3,43 +3,48 @@
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
-  isLoggedIn();
   eventlisteners();
 }
 
 function eventlisteners() {
-  if (elementByIdExist("login")) {
-    document.getElementById("login").onclick = function (e) {
-      e.preventDefault();
-      login();
-    };
+  const form = document.querySelector("form");
+
+  if (document.getElementById("login")) {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      let email = form.email.value;
+      let password = form.password.value;
+
+      login(email, password);
+    });
   }
-  if (elementByIdExist("signup")) {
-    document.querySelector("#signup").onclick = function (e) {
-      e.preventDefault();
-      signup();
-    };
+  if (document.getElementById("signup")) {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      let name = form.name.value;
+      let email = form.email.value;
+      let password = form.password.value;
+      let c_password = form.c_password.value;
+
+      signup(name, email, password, c_password);
+    });
   }
 }
 
-function login() {
+function login(email, password) {
   addLoadingScreen();
-  let email = getFormValue("email");
-  let password = getFormValue("password");
 
   const formData = new FormData();
   formData.append("email", email);
   formData.append("password", password);
 
-  postFetch(LOGIN, formData, (res) => createCookie(res));
+  post(getUrl(LOGIN), formData, (res) => createCookie(res));
 }
 
-function signup() {
+function signup(name, email, password, c_password) {
   addLoadingScreen();
-  let name = getFormValue("name");
-  let email = getFormValue("email");
-  let password = getFormValue("password");
-  let c_password = getFormValue("c_password");
 
   const formData = new FormData();
   formData.append("name", name);
@@ -47,50 +52,13 @@ function signup() {
   formData.append("password", password);
   formData.append("c_password", c_password);
 
-  console.log(formData);
-
-  postFetch(REGISTER, formData, (res) => node(res, email, password));
-}
-
-function node(res, email, password) {
-  console.log(res);
-  var details = {
-    email: email,
-    password: password,
-  };
-
-  console.log(details)
-
-  var formBody = [];
-  for (var property in details) {
-    var encodedKey = encodeURIComponent(property);
-    var encodedValue = encodeURIComponent(details[property]);
-    formBody.push(encodedKey + "=" + encodedValue);
-  }
-  formBody = formBody.join("&");
-
-  let baseUrl = getNodeUrl();
-
-  console.log(formBody);
-
-  return fetch(baseUrl + "/api/laravel/password?" + formBody , {
-    method: "POST",
-    headers: {
-      /*"Content-Type": "application/x-www-form-urlencoded",*/
-    },
-    body: formBody,
-  })
-    .then((response) => response.json())
-    .then((res) => {
-      console.log(res);
-      createCookie(res);
-    });
+  post(getUrl(REGISTER), formData, (res, err) => createCookie(res, err));
 }
 
 function createCookie(res) {
   if (res.error == null) {
     document.cookie = "token=" + res.success.token;
-    toDashboard();
+    toDashboard();//TODO CHANGE THIS!
   } else {
     removeLoadingScreen();
 
