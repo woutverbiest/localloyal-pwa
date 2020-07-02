@@ -3,23 +3,15 @@
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
-  isNotLoggedIn();
-  fetchDataWithToken(
-    "http://localloyal.test/api/shop",//TODO CHANGE THIS URL
-    "Bearer " + getTokenFromCookie(),
-    (res) => logger(res)
-  );
-}
-function logger(res) {
-  if (res.error != null) {
-    toSetup();
-  } else {
-    loadData();
-  }
+  (!loggedIn()) ? redirect("login") : null;
+
+
+  hasShop();
 }
 
+
 function loadData() {
-  fetchDataWithToken(
+  fetchWithToken(
     getUrl(TRANSACTIONS),
     "Bearer " + getTokenFromCookie(),
     (res) => chartData(res)
@@ -55,5 +47,7 @@ function chartData(res) {
     }
   }
   drawDoubleChart(points, green, "#€ spend in store", rewards, yellow, "#points spend on rewards", monthOrder(), "rewardpointschart")
+
+  
   removeLoadingScreen();
 }

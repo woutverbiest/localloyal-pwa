@@ -12,6 +12,8 @@ const staticAssets = [
   "/settings.html",
   "/code.html",
 
+  "/assets/js/localforage/localforage.min.js",
+
   "/assets/js/qrcodejs/qrcode.min.js",
   "/assets/js/code.js",
 

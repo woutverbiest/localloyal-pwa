@@ -1,64 +1,47 @@
 "use strict";
 
-
-
-document.addEventListener("DOMContentLoaded", init);
-
-function init() {}
-
 function fetchData(url, callback) {
   fetch(url)
     .then((response) => response.json())
     .then((json) => callback(json))
-    .catch((error) => console.log(error));
+    .catch((error) => console.log(error)); //TODO HANDLE ERROR
 }
 
-function postFetch(endpoint, data, callback) {
-  let url = getUrl(endpoint);
+function post(url, data, callback) {
   return fetch(url, {
     method: "POST",
     body: data,
   })
     .then((response) => response.json())
     .then((json) => callback(json))
-    .catch((error) => console.error("Error:", error));
+    .catch((error) => console.error("Error:", error)); //TODO HANDLE ERROR
 }
 
-function fetchDataWithToken(url, token, callback) {
-  return fetch(url, {
+function fetchWithToken(url, token, callback) {
+  fetch(url, {
     method: "GET",
     headers: {
-      "Authorization": token,
-      "Accept": "application/json",
+      Authorization: token,
+      Accept: "application/json",
     },
   })
     .then((response) => response.json())
     .then((json) => callback(json))
-    .catch((error) => console.error("Error:", error));
+    .catch((error) => console.error("Error:", error)); //TODO HANDLE ERROR
 }
 
-function postDataWithToken(url, token, data, callback) {
+function postWithToken(url, token, data, callback) {
   return fetch(url, {
     method: "POST",
     headers: {
-      "Authorization": token,
-      "Accept": "application/json",
+      Authorization: token,
+      Accept: "application/json",
     },
     body: data,
   })
     .then((response) => response.json())
     .then((json) => callback(json))
-    .catch((error) => console.error("Error:", error));
-}
-
-
-
-function getFormValue(id) {
-  return document.getElementById(id).value;
-}
-
-function elementByIdExist(id) {
-  return document.getElementById(id) !== null;
+    .catch((error) => console.error("Error:", error)); //TODO HANDLE ERROR
 }
 
 function getTokenFromCookie() {
@@ -71,31 +54,16 @@ function getTokenFromCookie() {
 
 function resetCookie() {
   document.cookie = "token=";
+
+  //TODO WHEN RESETING COOKIE (LOGING OUT), ALSO REMOVE INDEXEDDB
 }
 
-function isNotLoggedIn() {
-  if (getTokenFromCookie() == "") {
-    window.location.href = "login.html";
-  }
+function loggedIn() {
+  return getTokenFromCookie() != "" ? true : false;
 }
 
-function isLoggedIn() {
-  if (getTokenFromCookie() != "") {
-    window.location.href = "index.html";
-  }
-}
-
-//TODO USE THIS FUNCTION AND FIX IT
-function hasShop() {
-  fetchDataWithToken(SHOP, (res) => console.log(res));
-}
-
-function toDashboard() {
-  window.location.href = "index.html";
-}
-
-function toSetup() {
-  window.location.href = "setup.html";
+function redirect(page) {
+  window.location.href = page + ".html";
 }
 
 function addLoadingScreen() {
@@ -106,16 +74,38 @@ function removeLoadingScreen() {
   document.querySelector("#nothidden").id = "hidden";
 }
 
-
 function getUrl(endpoint) {
-  console.log(endpoint)
-  return getLaravelUrl() + endpoint;
+  return getServerUrl() + endpoint;
 }
 
-function getNodeUrl(){
-  return config.node;
+function getServerUrl() {
+  return config.server;
 }
 
-function getLaravelUrl(){
-  return config.laravel;
+function hasShop() {
+  return localforage
+    .createInstance({ name: "localloyal" })
+    .getItem("shop")
+    .then((shop) => {
+      if (shop === null) {
+        fetchWithToken(
+          getUrl(SHOP),
+          "Bearer " + getTokenFromCookie(),
+          (res, err) => shopHandler(res, err)
+        );
+      } else {
+        removeLoadingScreen();
+      }
+    });
+}
+
+function shopHandler(res) {
+  console.log(res);
+  if (res.error != null) {
+    redirect("setup");
+  } else {
+    localforage.createInstance({name:"localloyal"})
+    .setItem("shop", res.success);
+    //TODO GET TRANSACTIONS AND SET ALSO SAVE THEM IN INDEXEDDB
+  }
 }
