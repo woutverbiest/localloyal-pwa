@@ -1,16 +1,20 @@
 "use strict";
 
 const staticCacheVersion = "site-static-v1.0.0";
-const dynamicCacheVersion = "site-static-v1.0.0";
+const dynamicCacheVersion = "site-dynamic-v1.0.0";
 
 const staticAssets = [
   "/",
   "/index.html",
   "/fallback.html",
+  "/login.html",
+  "/signup.html",
+  "/settings.html",
 
   "/assets/stylesheets/reset.css",
   "/assets/stylesheets/screen.css",
-]; //TODO ADD NECESSARY JS FILES
+]; 
+//TODO ADD NECESSARY JS FILES
 
 //add assets to cache when installing a new service worker
 self.addEventListener("install", (event) => {
@@ -38,7 +42,8 @@ self.addEventListener("active", (event) => {
 
 //respond on any fetch request
 self.addEventListener("fetch", (event) => {
-  if ((1 = 1) /*TODO check if not data request from server*/) {
+  if (true) {
+    //TODO check if not data request from server
     event.respondWith(
       caches
         .match(event.request)
@@ -57,13 +62,17 @@ self.addEventListener("fetch", (event) => {
             })
           );
         })
-        //return fallbackpage if no internet and no page matched in cache
+        //return fallback if no internet and no page matched in cache
         .catch(() => {
           if (event.request.url.indexOf(".html") > -1) {
             return caches.match("/fallback.html");
+          } else if (event.request.url.indexOf(".json") > -1){
+            return {"error":"offline"}
           }
         })
     );
+  } else {
+    return null;
   }
 });
 
