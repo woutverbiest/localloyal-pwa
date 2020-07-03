@@ -3,12 +3,11 @@
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
-  (!loggedIn()) ? redirect("login") : null;
-
-
+  !loggedIn() ? redirect("login") : null;
   hasShop();
+  validateTransactionTimeStamp();
+  removeLoadingScreen();
 }
-
 
 function loadData() {
   fetchWithToken(
@@ -46,8 +45,16 @@ function chartData(res) {
       }
     }
   }
-  drawDoubleChart(points, green, "#€ spend in store", rewards, yellow, "#points spend on rewards", monthOrder(), "rewardpointschart")
+  drawDoubleChart(
+    points,
+    green,
+    "#€ spend in store",
+    rewards,
+    yellow,
+    "#points spend on rewards",
+    monthOrder(),
+    "rewardpointschart"
+  );
 
-  
   removeLoadingScreen();
 }

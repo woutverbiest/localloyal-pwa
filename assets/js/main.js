@@ -93,19 +93,54 @@ function hasShop() {
           "Bearer " + getTokenFromCookie(),
           (res, err) => shopHandler(res, err)
         );
-      } else {
-        removeLoadingScreen();
       }
     });
 }
 
 function shopHandler(res) {
-  console.log(res);
   if (res.error != null) {
     redirect("setup");
   } else {
-    localforage.createInstance({name:"localloyal"})
-    .setItem("shop", res.success);
-    //TODO GET TRANSACTIONS AND SET ALSO SAVE THEM IN INDEXEDDB
+    localforage
+      .createInstance({ name: "localloyal" })
+      .setItem("shop", res.success);
   }
+}
+
+function validateTransactionTimeStamp() {
+  localforage
+    .createInstance({ name: "localloyal" })
+    .getItem("transactionTimeStamp")
+    .then((timestamp) => {
+      if (timestamp === null) {
+        updateTransactions();
+      } else {
+        var one_day = 24 * 60 * 60 * 1000;
+        if (new Date() - new Date(timestamp.timestamp) > one_day) {
+          updateTransactions();
+        }
+      }
+    });
+}
+
+function updateTransactions() {
+  fetchWithToken(
+    getUrl(TRANSACTIONS),
+    "Bearer " + getTokenFromCookie(),
+    (res) => {
+      localforage
+        .createInstance({ name: "localloyal" })
+        .setItem("transactions", res.success);
+      updateTransactionTimeStamp();
+    }
+  );
+}
+
+function updateTransactionTimeStamp() {
+  localforage
+    .createInstance({ name: "localloyal" })
+    .setItem(
+      "transactionTimeStamp",
+      JSON.parse('{"timestamp":' + new Date().getTime() + "}")
+    );
 }
