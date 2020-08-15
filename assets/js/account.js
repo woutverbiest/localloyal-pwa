@@ -3,6 +3,7 @@
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
+  (loggedIn()) ? redirect("index") : null;
   eventlisteners();
 }
 
@@ -58,7 +59,7 @@ function signup(name, email, password, c_password) {
 function createCookie(res) {
   if (res.error == null) {
     document.cookie = "token=" + res.success.token;
-    toDashboard();//TODO CHANGE THIS!
+    redirect("index");//TODO CHANGE THIS!
   } else {
     removeLoadingScreen();
 
