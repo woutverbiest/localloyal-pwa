@@ -3,32 +3,24 @@
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
-    eventListeners();
+    newCodeSubmit();
 }
 
-function eventListeners() {
-  if (elementByIdExist("generate")) {
-    document.getElementById("generate").onclick = function (e) {
-      e.preventDefault();
-      generate();
-    };
-  }
-}
-function generate() {
-  let points = getFormValue("points");
+function newCodeSubmit(){
+  const form = document.querySelector("form.add-code")
 
-  const formData = new FormData();
-  formData.append("points", points);
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-  postDataWithToken(
-    "http://localloyal.test/api/code", //TODO NOT HARDCODE THIS
-    "Bearer " + getTokenFromCookie(),
-    formData,
-    (res) => logger(res)
-  );
+    const formData = new FormData();
+    formData.append("points", form.points.value);
+
+    postWithToken(getUrl(CODE), "Bearer " + getTokenFromCookie(), formData, (data) => {generate(data.success.code)});
+  })
 }
 
-function logger(res) {
-  console.log(res);
-  new QRCode(document.getElementById("qrcode"), res.success.code);
+function generate(code) {
+  document.getElementById("qrcode").innerHTML = "";
+  new QRCode(document.getElementById("qrcode"), code);
 }
+

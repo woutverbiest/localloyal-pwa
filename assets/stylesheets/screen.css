@@ -256,10 +256,6 @@ ul li.selected {
     transform: translate(24px, 0);
   }
 }
-main {
-  height: 100vh;
-}
-
 div.mobile {
   width: 100%;
   padding: 20px;
