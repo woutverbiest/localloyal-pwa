@@ -31,9 +31,6 @@ div.format1 {
   max-width: 400px;
 }
 
-div.format2 {
-  padding: 16px;
-}
 div.format2 a {
   margin-top: 20px;
 }
@@ -72,15 +69,7 @@ div.doublebutton {
   grid-template-columns: 50% 50%;
 }
 div.doublebutton a {
-  margin-right: 4px;
-  color: #5f6368;
-  border-color: #5f6368;
-}
-div.doublebutton a + a {
-  margin-left: 4px;
-  margin-right: 0;
-  color: #1a73e8;
-  border-color: #1a73e8;
+  margin-right: 5px;
 }
 
 input:invalid {
@@ -100,10 +89,9 @@ label {
 }
 
 h1 {
-  font-size: 3rem;
-  line-height: 3.5rem;
+  font-size: 2rem;
+  line-height: 2.5rem;
   padding-left: 16px;
-  padding-bottom: 25px;
   font-family: "baloo", Arial, sans-serif;
 }
 
@@ -114,9 +102,6 @@ h2 {
   font-family: "baloo", Arial, sans-serif;
 }
 
-/*a {
-
-}*/
 a.button {
   display: block;
   text-align: center;

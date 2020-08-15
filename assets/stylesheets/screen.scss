@@ -40,7 +40,6 @@ div.format1 {
 }
 
 div.format2 {
-  padding: 16px;
   a {
     margin-top: 20px;
   }
@@ -80,15 +79,7 @@ div.doublebutton {
   grid-template-columns: 50% 50%;
 
   a {
-    margin-right: 4px;
-    color: #5f6368;
-    border-color: #5f6368;
-  }
-  a + a {
-    margin-left: 4px;
-    margin-right: 0;
-    color: #1a73e8;
-    border-color: #1a73e8;
+    margin-right: 5px;
   }
 }
 
@@ -109,10 +100,9 @@ label {
 }
 
 h1 {
-  font-size: 3rem;
-  line-height: 3.5rem;
+  font-size: 2rem;
+  line-height: 2.5rem;
   padding-left: 16px;
-  padding-bottom: 25px;
   font-family: "baloo", Arial, sans-serif;
 }
 
@@ -122,10 +112,6 @@ h2 {
   line-height: 1.75rem;
   font-family: "baloo", Arial, sans-serif;
 }
-
-/*a {
-  
-}*/
 
 a.button{
   display: block;

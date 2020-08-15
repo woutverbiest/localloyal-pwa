@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", init);
 function init() {
   !loggedIn() ? redirect("login") : null;
   hasShop();
-  validateTransactionTimeStamp();
+  loadData();
   removeLoadingScreen();
 }
 

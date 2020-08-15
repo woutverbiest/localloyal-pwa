@@ -10,16 +10,7 @@
     />
     <title>Dashboard</title>
     <link rel="manifest" href="/manifest.webmanifest" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="assets/stylesheets/reset.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="assets/stylesheets/screen.css"
-    />
+
 
     <link
       rel="apple-touch-icon"
@@ -43,6 +34,25 @@
       href="assets/images/touch/safari-pinned-tab.svg"
       color="#11acf6"
     />
+    <link
+    rel="stylesheet"
+    type="text/css"
+    href="assets/stylesheets/reset.css"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="assets/stylesheets/materialize.min.css"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="assets/stylesheets/screen.css"
+  />
+    <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+  />
     <link rel="shortcut icon" href="assets/images/touch/favicon.ico" />
     <meta name="msapplication-TileColor" content="#11acf6" />
     <meta
@@ -56,32 +66,37 @@
     <meta name="theme-color" content="#ffffff" />
   </head>
   <body>
+    <header>
+      <nav>
+        <div class="nav-wrapper blue">
+          <a href="/" class="brand-logo center">localloyal</a>
+        </div>
+      </nav>
+      <h1>Dashboard</h1>
+    </header>
+
+
+
     <main>
       <div class="format2">
-        <h1>Dashboard</h1>
         <div class="format3">
           <div>
             <canvas id="rewardpointschart" width="400" height="400"></canvas>
           </div>
-          <div>
-            <a href="rewards.html" class="graybutton">Rewards</a>
-            <a href="statistics.html" class="graybutton">Statistics</a>
-            <a href="settings.html" class="graybutton">Settings</a>
-            <a href="code.html">Scan Code</a>
+          <div class="doublebutton">
+            <a href="code.html" class="button">Scan Code</a>
+            <a href="rewards.html" class="button graybutton">Rewards</a>
+            <a href="statistics.html" class="button graybutton">Statistics</a>
+            <a href="settings.html" class="button graybutton">Settings</a>
           </div>
         </div>
       </div>
     </main>
 
-    <div id="nothidden" class="loading">
-      <div class="lds-ellipsis">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
-
+    <script
+    type="text/javascript"
+    src="assets/js/materialize/materialize.min.js"
+  ></script>
     <script type="text/javascript" src="config/config.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
     <script type="text/javascript" src="assets/js/endpoints.js"></script>
