@@ -15,7 +15,6 @@ var pointdatayear = null;
 var pointdatalyear = null;
 
 function init() {
-  addLoadingScreen();
   eventListener();
   loadData();
 }
@@ -31,35 +30,28 @@ function drawChart() {
     daysthismonth(),
     "pointrewardchart"
   );
-
-  removeLoadingScreen();
 }
 
 function eventListener() {
-  if (elementByIdExist("month")) {
-    document.getElementById("month").onclick = function (e) {
-      e.preventDefault();
-      thismonth();
-    };
-  }
-  if (elementByIdExist("lmonth")) {
-    document.getElementById("lmonth").onclick = function (e) {
-      e.preventDefault();
-      lastmonth();
-    };
-  }
-  if (elementByIdExist("year")) {
-    document.getElementById("year").onclick = function (e) {
-      e.preventDefault();
-      thisyear();
-    };
-  }
-  if (elementByIdExist("lyear")) {
-    document.getElementById("lyear").onclick = function (e) {
-      e.preventDefault();
-      lastyear();
-    };
-  }
+  document.getElementById("month").onclick = function (e) {
+    e.preventDefault();
+    thismonth();
+  };
+
+  document.getElementById("lmonth").onclick = function (e) {
+    e.preventDefault();
+    lastmonth();
+  };
+
+  document.getElementById("year").onclick = function (e) {
+    e.preventDefault();
+    thisyear();
+  };
+
+  document.getElementById("lyear").onclick = function (e) {
+    e.preventDefault();
+    lastyear();
+  };
 }
 
 function thismonth() {
@@ -96,7 +88,7 @@ function lastyear() {
 }
 
 function loadData() {
-  fetchDataWithToken(
+  fetchWithToken(
     getUrl(TRANSACTIONS),
     "Bearer " + getTokenFromCookie(),
     (res) => processData(res.success)
@@ -120,12 +112,14 @@ function processyear(transactions) {
 
   for (let i = 0; i < transactions.length; i++) {
     let date = new Date(transactions[i].added_on);
-    if (date.getFullYear() == year) {if (transactions[i].spend_on_reward) {
+    if (date.getFullYear() == year) {
+      if (transactions[i].spend_on_reward) {
         rewarddatayear[date.getMonth() + monthsum] += transactions[i].points;
       } else {
         pointdatayear[date.getMonth() + monthsum] += transactions[i].points;
       }
-    } else if (date.getFullYear() == year - 1) {if (date.getMonth() > month) {
+    } else if (date.getFullYear() == year - 1) {
+      if (date.getMonth() > month) {
         if (transactions[i].spend_on_reward) {
           rewarddatayear[date.getMonth() + monthsum - 12] +=
             transactions[i].points;
@@ -155,7 +149,8 @@ function processlastyear(transactions) {
       } else {
         pointdatalyear[date.getMonth() + monthsum] += transactions[i].points;
       }
-    } else if (date.getFullYear() == year - 2) {if (date.getMonth() > month) {
+    } else if (date.getFullYear() == year - 2) {
+      if (date.getMonth() > month) {
         if (transactions[i].spend_on_reward) {
           rewarddatalyear[date.getMonth() + monthsum - 12] +=
             transactions[i].points;
@@ -179,32 +174,36 @@ function processmonth(transactions) {
   for (let i = 0; i < transactions.length; i++) {
     let date = new Date(transactions[i].added_on);
     console.log(date.getDate());
-    if (currentdate.getMonth() == date.getMonth() && currentdate.getFullYear() == date.getFullYear()) {
+    if (
+      currentdate.getMonth() == date.getMonth() &&
+      currentdate.getFullYear() == date.getFullYear()
+    ) {
       if (transactions[i].spend_on_reward) {
-        rewarddatamonth[date.getDate()-1] += transactions[i].points;
+        rewarddatamonth[date.getDate() - 1] += transactions[i].points;
       } else {
-        pointdatamonth[date.getDate()-1] += transactions[i].points;
+        pointdatamonth[date.getDate() - 1] += transactions[i].points;
       }
-    }
-
-    else if(currentdate.getMonth() - 1 == date.getMonth() && currentdate.getFullYear() == date.getFullYear()){
+    } else if (
+      currentdate.getMonth() - 1 == date.getMonth() &&
+      currentdate.getFullYear() == date.getFullYear()
+    ) {
       if (transactions[i].spend_on_reward) {
-        rewarddatalmonth[date.getDate()-1] += transactions[i].points;
+        rewarddatalmonth[date.getDate() - 1] += transactions[i].points;
       } else {
-        pointdatalmonth[date.getDate()-1] += transactions[i].points;
+        pointdatalmonth[date.getDate() - 1] += transactions[i].points;
       }
-    }
-    else if(currentdate.getMonth + 11 == date.getMonth() && currentdate.getFullYear() -1 == date.getFullYear()){
+    } else if (
+      currentdate.getMonth + 11 == date.getMonth() &&
+      currentdate.getFullYear() - 1 == date.getFullYear()
+    ) {
       if (transactions[i].spend_on_reward) {
-        rewarddatalmonth[date.getDate()-1] += transactions[i].points;
+        rewarddatalmonth[date.getDate() - 1] += transactions[i].points;
       } else {
-        pointdatalmonth[date.getDate()-1] += transactions[i].points;
+        pointdatalmonth[date.getDate() - 1] += transactions[i].points;
       }
     }
   }
 }
-
-
 
 function generatelist(n, value) {
   let list = [];

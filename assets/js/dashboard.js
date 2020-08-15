@@ -6,7 +6,6 @@ function init() {
   !loggedIn() ? redirect("login") : null;
   hasShop();
   loadData();
-  removeLoadingScreen();
 }
 
 function loadData() {
@@ -18,7 +17,7 @@ function loadData() {
 }
 
 function chartData(res) {
-  let transactions = res.success; //TODO CHECK IF SUCCESS
+  let transactions = res.success;
   let points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   let rewards = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
@@ -55,6 +54,4 @@ function chartData(res) {
     monthOrder(),
     "rewardpointschart"
   );
-
-  removeLoadingScreen();
 }
