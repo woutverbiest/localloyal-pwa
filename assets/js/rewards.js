@@ -46,6 +46,6 @@ function newRewardSubmit(){
         formData.append("points", form.points.value);
         formData.append("description", form.description.value);
     
-        postWithToken(getUrl(REWARD), "Bearer "+getTokenFromCookie() , formData ,(data) => {console.log(data)})
+        postWithToken(getUrl(REWARD), "Bearer "+getTokenFromCookie() , formData ,(data) => {redirect("rewards")});
     });
 }
