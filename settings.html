@@ -3,28 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Settings</title>
     <link
       rel="stylesheet"
       type="text/css"
       href="assets/stylesheets/reset.css"
     />
     <link
+    rel="stylesheet"
+    type="text/css"
+    href="assets/stylesheets/materialize.min.css"
+  />
+    <link
       rel="stylesheet"
       type="text/css"
       href="assets/stylesheets/screen.css"
     />
+    <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+  />
   </head>
   <body>
+    <header>
+      <nav>
+        <div class="nav-wrapper blue">
+          <a href="/" class="brand-logo center">localloyal</a>
+        </div>
+      </nav>
+      <h1>Settings</h1>
+    </header>
     <main>
       <div class="format2">
-        <h1>Settings</h1>
-        <a href="#" id="logOut">Log Out</a>
+        <a href="#" id="logOut" class="button">Log Out</a>
       </div>
     </main>
 
-    <script type="text/javascript" src="assets/js/main.js"></script>
+    <script
+      type="text/javascript"
+      src="assets/js/materialize/materialize.min.js"
+    ></script>
+    <script type="text/javascript" src="config/config.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
+    <script type="text/javascript" src="assets/js/endpoints.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
     <script type="text/javascript" src="assets/js/settings.js"></script>
   </body>
 </html>
