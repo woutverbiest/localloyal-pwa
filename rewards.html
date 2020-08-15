@@ -38,7 +38,10 @@
     <main></main>
 
     <div class="fixed-action-btn">
-      <a class="btn-floating btn-large blue sidenav-trigger" data-target="side-form">
+      <a
+        class="btn-floating btn-large blue sidenav-trigger"
+        data-target="side-form"
+      >
         <i class="large material-icons">add</i>
       </a>
     </div>
@@ -88,6 +91,10 @@
       const forms = document.querySelectorAll(".side-form");
       M.Sidenav.init(forms, { edge: "right" });
     </script>
+    <script
+      type="text/javascript"
+      src="assets/js/localforage/localforage.min.js"
+    ></script>
     <script type="text/javascript" src="config/config.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
     <script type="text/javascript" src="assets/js/endpoints.js"></script>

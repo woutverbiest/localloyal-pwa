@@ -82,6 +82,10 @@ function getServerUrl() {
   return config.server;
 }
 
+async function getShop(){
+  return await localforage.createInstance({ name: "localloyal" }).getItem("shop");
+}
+
 function hasShop() {
   return localforage
     .createInstance({ name: "localloyal" })

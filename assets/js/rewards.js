@@ -7,10 +7,12 @@ function init() {
   loadData();
 }
 
-function loadData() {
+async function loadData() {
   let url = getUrl(SHOP);
-  fetchData(`${url}/1/rewards`, (data) => addData(data));
+  let id = (await getShop()).id;
+  fetchData(`${url}/${id}/rewards`, (data) => addData(data));
   newRewardSubmit();
+  
 }
 
 function addData(data) {
