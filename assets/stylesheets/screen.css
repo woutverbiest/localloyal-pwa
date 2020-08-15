@@ -17,10 +17,10 @@ body {
 }
 
 main {
-  padding: 8px;
   margin-left: auto;
   margin-right: auto;
   max-width: 840px;
+  padding: 16px;
 }
 
 div.format1 {
@@ -100,8 +100,9 @@ label {
 }
 
 h1 {
-  font-size: 2.25rem;
-  line-height: 2.75rem;
+  font-size: 3rem;
+  line-height: 3.5rem;
+  padding-left: 16px;
   padding-bottom: 25px;
   font-family: "baloo", Arial, sans-serif;
 }
@@ -113,7 +114,10 @@ h2 {
   font-family: "baloo", Arial, sans-serif;
 }
 
-a {
+/*a {
+
+}*/
+a.button {
   display: block;
   text-align: center;
   padding: 8px;
@@ -133,9 +137,18 @@ a.graybutton {
   border-color: #5f6368;
 }
 
+a.whitebutton {
+  color: #fff;
+  border-color: #fff;
+}
+
+a.brand-logo {
+  font-family: "baloo", Arial, sans-serif;
+}
+
 p {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
   letter-spacing: 0.015em;
   color: #5f6368;
   padding-bottom: 20px;
@@ -243,19 +256,42 @@ ul li.selected {
     transform: translate(24px, 0);
   }
 }
-@media only screen and (min-width: 600px) {
-  .format1 > div {
-    border: 1px solid #dadce0;
-    padding: 16px;
-    border-radius: 15px;
-  }
+main {
+  height: 100vh;
+}
 
-  .format3 {
-    display: grid;
-    grid-template-columns: 50% 50%;
+div.mobile {
+  width: 100%;
+  padding: 20px;
+  height: 100vh;
+}
+
+div.card {
+  padding: 16px;
+}
+
+@media only screen and (min-width: 600px) {
+  div.mobile {
+    position: static;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    padding: 0;
+    /*border: $default-border;
+    border-radius: $default-border-radius;*/
   }
-  .format3 div {
-    padding: 8px;
+  div.mobile div {
+    width: 100%;
+    max-width: 400px;
+    height: min-content;
+  }
+  div.mobile > div {
+    border: 1px solid #dadce0;
+    border-radius: 16px;
+    padding: 16px;
+    box-sizing: border-box;
   }
 }
 
