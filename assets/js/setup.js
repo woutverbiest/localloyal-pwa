@@ -34,6 +34,6 @@ function newShopSubmit(){
     formData.append("latitude", "1")
     formData.append("latitudepos", "1")
 
-    postWithToken(getUrl(SHOP_CREATE), "Bearer "+getTokenFromCookie(), formData, (data) => {redirect(index)} )
+    postWithToken(getUrl(SHOP_CREATE), "Bearer "+getTokenFromCookie(), formData, (data) => {redirect("index")} )
   })
 }
