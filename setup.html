@@ -11,95 +11,129 @@
     <link
       rel="stylesheet"
       type="text/css"
+      href="assets/stylesheets/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
       href="assets/stylesheets/screen.css"
     />
     <title>Setup</title>
   </head>
   <body>
-    <main>
-    <div id="getstarted" class="format1">
-      <div>
-      <h1>Let's get started</h1>
-      <p>In the next few steps, you will configure your localloyal shop!</p>
-      <a href="#" id="progress1">next</a>
-    </div>
-    </div>
-
-    <div id="setup" class="hidden format2">
+    <header>
+      <nav>
+        <div class="nav-wrapper blue">
+          <a href="/" class="brand-logo center">localloyal</a>
+        </div>
+      </nav>
       <h1>Setup</h1>
-      <ul>
-        <li class=selected>Shop</li>
-        <li>Openinghours</li>
-        <li>Rewards</li>
-        <li>Pincode</li>
-      </ul>
-      <div id="shop" class="hidden">
-        <h2>Shop</h2>
-        <form>
-          <label for="shopname">Name Shop</label>
-          <input type="text" id="shopname" name="shopname" />
-          <label for="shoptype">Shop Type</label>
-          <select id="shoptype" name="shoptype">
-          </select>
-          <label for="description">Description</label>
-          <textarea id="description" rows="3"></textarea>
-          <label for="phone">Phone No.</label>
-          <input type="text" id="phone" name="phone" />
-          <label for="street">Street</label>
-          <input type="text" id="street" name="street" />
-          <label for="city">City</lable>
-          <input type="text" id="city" name="city">
-          <label for="number">Number</lable>
-          <input type="text" id="number" name="number">
-          <label for="country">Country</label>
-          <input type="text" id="country" name="country">
+    </header>
 
-            
-          <a href="#" type="submit" id="progress2">Next</a>
-            
-          
+    <main>
+      <div id="getstarted" class="card">
+        <h2>Let's get started</h2>
+        <p>In the next few steps, you will configure your localloyal shop!</p>
+        <a onclick="toshopsetup()" class="button">next</a>
+      </div>
+
+      <div id="createshopform" class="hidden">
+        <form class="add-shop container section">
+          <div class="input-field">
+            <input
+              placeholder="shopname"
+              id="shopname"
+              type="text"
+              class="validate"
+            />
+            <label for="shopname">shopname</label>
+          </div>
+          <div class="input-field">
+            <input
+              placeholder="shoptype"
+              id="shoptype"
+              type="text"
+              class="validate"
+            />
+            <label for="shoptype">shoptype</label>
+          </div>
+          <div class="input-field">
+            <input
+              placeholder="description"
+              id="description"
+              type="text"
+              class="validate"
+            />
+            <label for="description">description</label>
+          </div>
+          <div class="input-field">
+            <input
+              placeholder="phonenumber"
+              id="phonenumber"
+              type="text"
+              class="validate"
+            />
+            <label for="phonenumber">phonenumber</label>
+          </div>
+          <div class="input-field">
+            <input
+              placeholder="street"
+              id="street"
+              type="text"
+              class="validate"
+            />
+            <label for="street">street</label>
+          </div>
+          <div class="input-field">
+            <input
+              placeholder="city"
+              id="city"
+              type="text"
+              class="validate"
+            />
+            <label for="city">city</label>
+          </div>
+          <div class="input-field">
+            <input
+              placeholder="number"
+              id="number"
+              type="text"
+              class="validate"
+            />
+            <label for="number">number</label>
+          </div>
+          <div class="input-field">
+            <input
+              placeholder="country"
+              id="country"
+              type="text"
+              class="validate"
+            />
+            <label for="country">country</label>
+          </div>
+          <div class="input-field center">
+            <button class="btn-small blue">Create</button>
+          </div>
         </form>
       </div>
-      <div class=hidden id=openinghours>
-        <h2>Openinghours</h2>
-        <p>kdsjfkjsdqkfjksqdjf</p>
-        <!--TODO ADD SOME TEXT-->
-        <a href="#" type="submit" id="progress3">Next</a>
-      </div>
-      <div class=hidden id=rewards>
-        <h2>Rewards</h2>
-        <h3>Add Some rewards to your shop!</h3>
-        <p>KFQJFKQSKFJKLQSJDKFJKJFKDSJF</p>
-        <!--TODO ADD SOME TEXT-->
-        <a href="#" type="submit" id="progress4">Next</a>
-      </div>
-      <div class=hidden id=pincode>
-        <h2>Pincode</h2>
-        <h3>djfkqjfkjdskfjdkfjkd</h3>
+    </main>
 
-        <a href="#" type="submit" id="progress5">Next</a>
+    <div id="hidden" class="loading">
+      <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
     </div>
-
-    <div class="hidden format1" id=successful >
-        <h1>Setup Successful</h1>
-        <p>kfqsdkfj klqds jfkjdsmkf,klqdsjfk qdsjkfjdqksfk dsqfjmqdsfk</p>
-        <a href="index.html">Dashboard</a>
-    </div>
-  </main>
-
-  <div id="hidden" class="loading">
-    <div class="lds-ellipsis">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-
-  <script type="text/javascript" src="assets/js/endpoints.js"></script>
+    <script type="text/javascript" src="config/config.js"></script>
+    <script type="text/javascript" src="assets/js/endpoints.js"></script>
     <script type="text/javascript" src="assets/js/main.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
+    <script
+      type="text/javascript"
+      src="assets/js/materialize/materialize.min.js"
+    ></script>
     <script type="text/javascript" src="assets/js/setup.js"></script>
   </body>
 </html>

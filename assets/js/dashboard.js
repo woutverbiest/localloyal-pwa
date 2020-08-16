@@ -9,11 +9,12 @@ function init() {
 }
 
 function loadData() {
+  try{
   fetchWithToken(
     getUrl(TRANSACTIONS),
     "Bearer " + getTokenFromCookie(),
     (res) => chartData(res)
-  );
+  );} catch (e) {redirect("setup")}
 }
 
 function chartData(res) {

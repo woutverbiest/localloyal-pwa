@@ -92,11 +92,14 @@ function hasShop() {
     .getItem("shop")
     .then((shop) => {
       if (shop === null) {
+        try{
         fetchWithToken(
           getUrl(SHOP),
           "Bearer " + getTokenFromCookie(),
           (res, err) => shopHandler(res, err)
-        );
+        );} catch (e) {
+          redirect("setup");
+        }
       }
     });
 }
